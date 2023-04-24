@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <limits.h>
 #include "main.h"
 /**
  * specify - specifies which converter and prints appropriately
@@ -18,6 +19,7 @@ int specify(const char *spec, va_list argm)
 		case 'c':
 			_putchar(va_arg(argm, int));
 			return (1);
+
 		case 's':
 			str = va_arg(argm, char *);
 			while (str[counter] != '\0')
@@ -26,9 +28,15 @@ int specify(const char *spec, va_list argm)
 				counter++;
 			}
 			return (counter);
+
 		case '%':
 			_putchar(*(spec));
 			return (1);
+
+		case 'i':
+		case 'd':
+			counter = print_num(va_arg(argm, int));
+			return (counter);
 		default:
 			_putchar(*(spec - 1));
 			_putchar(*(spec));
