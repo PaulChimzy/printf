@@ -15,7 +15,14 @@ int print_num(int integer)
 	{
 		_putchar('-');
 		counter++;
-		integer *= -1;
+		if (integer > INT_MIN)
+			integer *= -1;
+		else
+		{
+			_putchar('0' + (integer / 1000000000 * -1));
+			integer = (integer % 1000000000) * (-1);
+		}
+			
 	}
 	else if (integer == 0)
 	{
